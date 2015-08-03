@@ -12,6 +12,6 @@ public final class CaseDescriptor {
 		public String defendantName;
 		public String dateFiled;      // OK. "" if not specified.
 		public String dateClosed;     // OK. "" if not specified.
+		public String descrUrl;
 		// TODO: For each count - description of charges and disposition.
-		
 	}

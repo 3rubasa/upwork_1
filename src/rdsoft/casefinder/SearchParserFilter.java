@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 
 // Makes request to the web server and parses
 // the response breaking it into table sections.
-final class SearchParserFilter extends BasicFilter {
+class SearchParserFilter extends BasicFilter {
 	public SearchParserFilter(HttpRequest httpRequest) {
 		this.httpRequest = httpRequest;
 	}
