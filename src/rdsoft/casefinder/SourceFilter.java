@@ -14,7 +14,7 @@ final class SourceFilter extends BasicFilter {
 		if (nextFilter == null)
 			return false;
 		
-		nextFilter.Process(new SearchRequest(lname, fname, mname, DOB).GetRequestString());
+		nextFilter.Process(new SearchRequest(lname, fname, mname, DOB).GetRequestString(), null);
 		
 		return true;
 	}
@@ -22,7 +22,7 @@ final class SourceFilter extends BasicFilter {
 	private String lname, fname, mname, DOB;
 
 	@Override
-	public void Process(String input) {
+	public void Process(String input, FilterDataContext context) {
 		// TODO Auto-generated method stub
 		
 	}

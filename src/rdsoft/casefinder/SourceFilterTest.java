@@ -16,7 +16,7 @@ public class SourceFilterTest {
 		SourceFilter filter = new SourceFilter("Smith", "John", "Ben", "01/01/25");
 		
 		filter.Attach(new BasicFilter() {
-			public void Process(String input) {
+			public void Process(String input, FilterDataContext context) {
 				if (input.compareTo(expectedResult) != 0){
 					fail("Resulting string is incorrect. Value = " + input);
 				}

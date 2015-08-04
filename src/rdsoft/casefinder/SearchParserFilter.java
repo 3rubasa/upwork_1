@@ -11,7 +11,7 @@ class SearchParserFilter extends BasicFilter {
 		this.httpRequest = httpRequest;
 	}
 	
-	public void Process(String input) throws IOException {
+	public void Process(String input, FilterDataContext context) throws IOException {
 		String response = httpRequest.MakeRequest(input);
 		
 		// Capture single tag <table class=...>...</table> tag. Capture group #1 represents
@@ -20,7 +20,7 @@ class SearchParserFilter extends BasicFilter {
 		Matcher matcher = pattern.matcher(response);
 		
 		while (matcher.find()) {
-			nextFilter.Process(matcher.group(1));
+			nextFilter.Process(matcher.group(1), null);
 		}
 	}
 	

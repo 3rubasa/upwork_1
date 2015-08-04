@@ -4,5 +4,5 @@ import java.io.IOException;
 
 interface Filter {
 	void Attach(Filter filter);
-	void Process(String input) throws IOException;
+	void Process(String input, FilterDataContext context) throws IOException;
 }

@@ -20,7 +20,7 @@ public class TableParserFilterTest {
 		}
 		
 		@Override
-		public void Process(String input) {
+		public void Process(String input, FilterDataContext context) {
 			callCounter++;
 		}
 		
@@ -35,7 +35,7 @@ public class TableParserFilterTest {
 		}
 		
 		@Override
-		public void Process(String input) {
+		public void Process(String input, FilterDataContext context) {
 			callCounter++;
 		}
 		
@@ -74,9 +74,9 @@ public class TableParserFilterTest {
 		
 		tableParserFilter.Attach(descrParser);
 		
-		tableParserFilter.Process(ReadFileToString("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\MoreThan20ResultsTable.html"));
-		tableParserFilter.Process(ReadFileToString("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\MoreThan20ResultsTable.html"));
-		tableParserFilter.Process(ReadFileToString("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\LessThan20ResultsTable.html"));
+		tableParserFilter.Process(ReadFileToString("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\MoreThan20ResultsTable.html"), null);
+		tableParserFilter.Process(ReadFileToString("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\MoreThan20ResultsTable.html"), null);
+		tableParserFilter.Process(ReadFileToString("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\LessThan20ResultsTable.html"), null);
 		
 		if (searchParserMock.callCounter != expectedCallsToFilter) {
 			fail("Incorrect number of calls to Search Parser filter.");

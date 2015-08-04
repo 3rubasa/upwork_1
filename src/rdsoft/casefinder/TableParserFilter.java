@@ -11,7 +11,7 @@ final class TableParserFilter extends BasicFilter {
 		this.httpRequest = httpRequest;
 	}
 	
-	public void Process(String input) throws IOException {
+	public void Process(String input, FilterDataContext context) throws IOException {
 		// First we check if the table contains all cases or is shortened to 20.
 		
 		Pattern pattern = Pattern.compile("class=\"moreResults\"\\>\\<a\\shref=\"(.+?)\"\\>", Pattern.MULTILINE | Pattern.DOTALL);
@@ -21,7 +21,7 @@ final class TableParserFilter extends BasicFilter {
 			// There are more results available. Generate request and 
 			// pass it to SearchParserFilter.
 			
-			searchParserFilter.Process(new MoreResultsRequest(matcher.group(1)).GetRequestString());
+			searchParserFilter.Process(new MoreResultsRequest(matcher.group(1)).GetRequestString(), null);
 			
 			return;
 		} 
@@ -30,10 +30,13 @@ final class TableParserFilter extends BasicFilter {
 		matcher = pattern.matcher(input);
 		
 		while (matcher.find()) {
-			String response = httpRequest.MakeRequest(
-					new CaseInfoRequest(matcher.group(1)).GetRequestString());
+			String url = new CaseInfoRequest(matcher.group(1)).GetRequestString();
+			String response = httpRequest.MakeRequest(url);
 			
-			nextFilter.Process(response);
+			FilterDataContext cntx = new FilterDataContext();
+			cntx.url = url;
+			
+			nextFilter.Process(response, cntx);
 		}
 	}
 	

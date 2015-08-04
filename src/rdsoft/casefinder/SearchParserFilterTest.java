@@ -14,7 +14,7 @@ import org.junit.Test;
 
 final class MockFilter extends BasicFilter {
 	@Override
-	public void Process(String input) throws IOException {
+	public void Process(String input, FilterDataContext context) throws IOException {
 		counter++;
 	}
 	
@@ -64,7 +64,7 @@ public class SearchParserFilterTest {
 		
 		filter.Attach(mf);
 		
-		filter.Process(inputString);
+		filter.Process(inputString, null);
 		
 		if (mf.counter != expectedResult) {
 			fail("Number of calls is incorrect.");

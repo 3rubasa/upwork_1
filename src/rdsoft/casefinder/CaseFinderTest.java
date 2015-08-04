@@ -66,9 +66,9 @@ public class CaseFinderTest {
 		
 		int numOfRes = result.size();
 		
-		PrintWriter writer = new PrintWriter("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\TestResult.html", "UTF-8");
+		PrintWriter writer = new PrintWriter("D:\\Upwork\\Workspace1\\CaseFinder\\TestData\\TestResult.html", "utf-8");
 		
-		writer.write("<html><head></head><body><table border=\"1\">");
+		writer.write("<html><head><meta charset=\"utf-8\"></head><body><table border=\"1\">");
 		
 		writer.write("<tr>");
 		writer.write("<th>Case number</th>");
@@ -77,18 +77,36 @@ public class CaseFinderTest {
 		writer.write("<th>Date closed</th>");
 		writer.write("<th>Plaintiff name</th>");
 		writer.write("<th>Defendant name</th>");
-		writer.write("<th>Found party</th>");
+		writer.write("<th>URL</th>");
 		writer.write("</tr>");
 		
 		for(CaseDescriptor el : result) {
 			writer.write("<tr>");
-			writer.write("<td>" + el.caseNumber + "</td>");
-			writer.write("<td>" + el.courtName + "</td>");
-			writer.write("<td>" + el.dateFiled + "</td>");
-			writer.write("<td>" + el.dateClosed + "</td>");
-			writer.write("<td>" + el.plaintiffName + "</td>");
-			writer.write("<td>" + el.defendantName + "</td>");
-			writer.write("<td>" + el.foundParty + "</td>");
+			if (el.caseNumber != null && el.caseNumber.compareTo("") == 0) writer.write("<td style=\"background-color: #aa0000\">"); else writer.write("<td>");
+				writer.write(el.caseNumber + "</td>");
+			
+				if (el.courtName != null && el.courtName.compareTo("") == 0) writer.write("<td style=\"background-color: #aa0000\">"); else writer.write("<td>");
+				writer.write(el.courtName + "</td>");
+				
+				if (el.dateFiled != null && el.dateFiled.compareTo("") == 0) writer.write("<td style=\"background-color: #aa0000\">"); else writer.write("<td>");
+				writer.write(el.dateFiled + "</td>");
+				
+				if (el.dateClosed != null && el.dateClosed.compareTo("") == 0) writer.write("<td style=\"background-color: #aa0000\">"); else writer.write("<td>");
+				writer.write(el.dateClosed + "</td>");
+				
+				if (el.plaintiffName != null && el.plaintiffName.size() == 0) writer.write("<td style=\"background-color: #aa0000\">"); else writer.write("<td>");
+				for (String dn: el.plaintiffName) {
+					writer.write(dn + "</br>");
+				}
+				
+				if (el.defendantName != null && el.defendantName.size() == 0) writer.write("<td style=\"background-color: #aa0000\">"); else  writer.write("<td>");
+				for (String dn: el.defendantName) {
+					writer.write(dn + "</br>");
+				}
+				
+				if (el.descrUrl != null && el.descrUrl.compareTo("") == 0) writer.write("<td style=\"background-color: #aa0000\">"); else writer.write("<td>");
+				writer.write(el.descrUrl + "</td>");
+				
 			writer.write("</tr>\n");
 		}
 		
